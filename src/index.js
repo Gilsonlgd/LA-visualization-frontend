@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import GlobalStyle from './GlobalStyles';
 import reportWebVitals from './reportWebVitals';
+import { Tooltip } from "react-tooltip";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GlobalStyle />
+    <Tooltip />
     <App />
   </React.StrictMode>
 );

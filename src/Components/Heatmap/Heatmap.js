@@ -1,6 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import "./Heatmap.css";
+import { Tooltip } from "react-tooltip";
 
 function Heatmap({ topHeader, sideHeader, data, maxValue, minValue }) {
   function getCellColor(value) {
@@ -15,26 +16,30 @@ function Heatmap({ topHeader, sideHeader, data, maxValue, minValue }) {
   }
   return (
     <div className="heatmap-container">
-      <Table striped bordered hover className="teste">
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th></th>
             {topHeader.map((header) => (
-              <th>{header}</th>
+              <th className="text-center">{header}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {data.map((row, index) => (
             <tr>
-              <th>{sideHeader[index]}</th>
+              <th className="side-header">{sideHeader[index]}</th>
               {row.map((value) => (
-                <td
-                  className="text-center"
-                  style={{ backgroundColor: getCellColor(value) }}
-                >
-                  {value}
-                </td>
+                <>
+                  <td
+                    className="text-center"
+                    style={{ backgroundColor: getCellColor(value) }}
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={"Número de Acessos: " + value}
+                    data-tooltip-place="top"
+                  />
+                  <Tooltip id="my-tooltip" />
+                </>
               ))}
             </tr>
           ))}
