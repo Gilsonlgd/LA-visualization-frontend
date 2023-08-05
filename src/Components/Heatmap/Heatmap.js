@@ -1,6 +1,8 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
+import "./Heatmap.css";
 
-function Heatmap({topHeader, sideHeader, data, maxValue, minValue}) {
+function Heatmap({ topHeader, sideHeader, data, maxValue, minValue }) {
   function getCellColor(value) {
     const normalizedValue = (value - minValue) / (maxValue - minValue);
 
@@ -11,29 +13,35 @@ function Heatmap({topHeader, sideHeader, data, maxValue, minValue}) {
 
     return `rgba(${red}, ${green}, ${blue}, ${opacity})`;
   }
-  return(
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          {topHeader.map((header) => (
-            <th>{header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, index) => (
+  return (
+    <div className="heatmap-container">
+      <Table striped bordered hover className="teste">
+        <thead>
           <tr>
-            <th>{sideHeader[index]}</th>
-            {row.map((value) => (
-              <td className="text-center" style={{ backgroundColor: getCellColor(value) }}>{value}</td>
+            <th></th>
+            {topHeader.map((header) => (
+              <th>{header}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>);
+        </thead>
+        <tbody>
+          {data.map((row, index) => (
+            <tr>
+              <th>{sideHeader[index]}</th>
+              {row.map((value) => (
+                <td
+                  className="text-center"
+                  style={{ backgroundColor: getCellColor(value) }}
+                >
+                  {value}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
 }
 
 export default Heatmap;
