@@ -1,14 +1,93 @@
 .heatmap-container {
+  width: 100%;
   max-width: 100%;
   max-height: 70vh;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   justify-content: center;
 }
 
+.heatmap-table {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.compact .top-header {
+  width: 10px;
+  max-width: 30px;
+  font-size: 10px;
+  padding: 5px;
+  height: 50px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.standard .top-header {
+  font-size: medium;
+  vertical-align: middle;
+  padding: 5px;
+  height: 50px;
+  user-select: none;
+}
+
 .side-header {
-  max-width: 150px;
+  max-width: 300px;
+  max-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: smaller;
+  transition: all 1s ease;
+  padding: 5px;
+}
+
+.standard .side-header {
+  font-size: medium;
+}
+
+.side-header.side-expanded {
+  max-width: 1000px;
+}
+
+.top-header.top-expanded {
+  max-width: 100px;
+}
+
+.compact .table-cell {
+  width: 10px;
+  max-width: 30px;
+  max-height: 10px;
+  padding: 5px;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.standard .table-cell {
+  width: 100%;
+  padding: 5px;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.table-cell:hover .text-hover {
+  opacity: 1;
+}
+
+.text-hover {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
 }

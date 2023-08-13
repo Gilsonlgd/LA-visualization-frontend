@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [data, setData] = useState([]);
   const [maxValue, setMaxValue] = useState(0);
   const [minValue, setMinValue] = useState(0);
+  const [selectedView] = useState("geral");
 
   useEffect(() => {
     formatData();
@@ -18,6 +19,34 @@ export default function Dashboard() {
     setMinValue(newMinValue);
 
     function formatData() {
+      const newData = [];
+
+      const uniqueUsers = [...new Set(logs.map((log) => log["Nome completo"]))];
+      const uniqueModules = [
+        ...new Set(logs.map((log) => log["Contexto do Evento"])),
+      ];
+
+      setSideHeader(uniqueModules);
+      setTopHeader(uniqueUsers);
+
+      uniqueModules.forEach((module) => {
+        const row = [];
+        uniqueUsers.forEach((user) => {
+          const filteredLogs = logs.filter(
+            (log) =>
+              log["Nome completo"] === user &&
+              log["Contexto do Evento"] === module &&
+              log["Nome do evento"] === "Módulo do curso visualizado"
+          );
+          row.push(filteredLogs.length);
+        });
+        newData.push(row);
+      });
+
+      setData(newData);
+    }
+
+    /*function formatData() {
       const newData = [];
 
       const filteredLogs = logs.filter(
@@ -47,8 +76,8 @@ export default function Dashboard() {
       });
 
       setData(newData);
-    }
-  }, [data, topHeader, sideHeader]);
+    }*/
+  }, [data, sideHeader, topHeader]);
 
   return (
     <div className="dashboard-container p-3">
@@ -74,6 +103,7 @@ export default function Dashboard() {
                     data={data}
                     maxValue={maxValue}
                     minValue={minValue}
+                    compact={true}
                   />
                 </div>
               </div>
