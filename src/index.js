@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import GlobalStyle from './GlobalStyles';
 import reportWebVitals from './reportWebVitals';
+import '@fortawesome/fontawesome-free/css/all.css';
 import { Tooltip } from "react-tooltip";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -11,6 +11,7 @@ export default function IndividualView() {
   const [maxValue, setMaxValue] = useState(0);
   const [minValue, setMinValue] = useState(0);
   const { user_name } = useParams();
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -55,9 +56,17 @@ export default function IndividualView() {
 
   return (
     <div className="dashboard-container p-3">
-      <div className="row mt-4">
+      <div className="row mt-4 mb-2">
         <div className="col-12">
           <h1>Dashboard Heatmap</h1>
+        </div>
+        <div className="col-12">
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate("/")}
+          >
+            <i className="fas fa-arrow-left"/> Voltar
+          </button>
         </div>
       </div>
       <div className="row">
