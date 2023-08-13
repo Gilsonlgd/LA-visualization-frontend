@@ -52,10 +52,6 @@
   max-width: 1000px;
 }
 
-.top-header.top-expanded {
-  max-width: 100px;
-}
-
 .compact .table-cell {
   width: 10px;
   max-width: 30px;

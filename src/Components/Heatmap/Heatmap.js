@@ -1,9 +1,8 @@
 import { React, useState } from "react";
 import Table from "react-bootstrap/Table";
 import "./Heatmap.css";
-import { Tooltip } from "react-tooltip";
 
-function Heatmap({ topHeader, sideHeader, data, maxValue, minValue, compact }) {
+function Heatmap({ topHeader, sideHeader, data, maxValue, minValue, compact, onTHeaderClick }) {
   const [sideExpanded, setSideExpanded] = useState(false);
   const [topExpanded, setTopExpanded] = useState(-1);
 
@@ -13,6 +12,8 @@ function Heatmap({ topHeader, sideHeader, data, maxValue, minValue, compact }) {
 
   const handleTopHeaderClick = (index) => {
     setTopExpanded((prevState) => (prevState === index ? -1 : index));
+    if (compact)
+      onTHeaderClick(topHeader[index]);
   };
 
   function getCellColor(value) {
@@ -39,7 +40,7 @@ function Heatmap({ topHeader, sideHeader, data, maxValue, minValue, compact }) {
         <Table bordered>
           <thead className="table-header">
             <tr>
-              <th></th>
+              <th key={"empty"}></th>
               {topHeader.map((header, index) => (
                 <th
                   className={
@@ -47,6 +48,7 @@ function Heatmap({ topHeader, sideHeader, data, maxValue, minValue, compact }) {
                     (topExpanded === index ? " top-expanded" : "")
                   }
                   onClick={() => handleTopHeaderClick(index)}
+                  key={"header-" + index}
                 >
                   {getFormatedName(header)}
                 </th>
@@ -54,21 +56,23 @@ function Heatmap({ topHeader, sideHeader, data, maxValue, minValue, compact }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((row, index) => (
-              <tr>
+            {data.map((row, rowIndex) => (
+              <tr key={"row-" + rowIndex}>
                 <th
                   className={
                     "side-header" + (sideExpanded ? " side-expanded" : "")
                   }
                   onClick={() => handleSideHeaderClick()}
+                  key={"side-header-" + rowIndex}
                 >
-                  {sideHeader[index]}
+                  {sideHeader[rowIndex]}
                 </th>
-                {row.map((value) => (
+                {row.map((value, columnIndex) => (
                   <>
                     <td
                       className="table-cell"
                       style={{ backgroundColor: getCellColor(value) }}
+                      key={`cell-${rowIndex}-${columnIndex}`}
                     >
                       <span className="text-hover">{value}</span>
                     </td>

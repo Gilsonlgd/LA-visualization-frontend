@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Heatmap from "../../Components/Heatmap/Heatmap";
 import logs from "../../Data/anonimizado.json";
 import "./DashboardView.css";
@@ -9,7 +10,7 @@ export default function Dashboard() {
   const [data, setData] = useState([]);
   const [maxValue, setMaxValue] = useState(0);
   const [minValue, setMinValue] = useState(0);
-  const [selectedView] = useState("geral");
+  const navigate = useNavigate();
 
   useEffect(() => {
     formatData();
@@ -45,39 +46,7 @@ export default function Dashboard() {
 
       setData(newData);
     }
-
-    /*function formatData() {
-      const newData = [];
-
-      const filteredLogs = logs.filter(
-        (log) =>
-          log["Nome completo"] === "Susan Palmer" &&
-          log["Nome do evento"] === "Módulo do curso visualizado"
-      );
-
-      const modules = filteredLogs.map((log) => log["Contexto do Evento"]);
-      const uniqueModules = [...new Set(modules)];
-
-      setSideHeader(uniqueModules);
-      setTopHeader(["Susan Palmer"]);
-
-      sideHeader.forEach((module) => {
-        const row = [];
-        topHeader.forEach((user) => {
-          const filteredLogs = logs.filter(
-            (log) =>
-              log["Nome completo"] === user &&
-              log["Contexto do Evento"] === module &&
-              log["Nome do evento"] === "Módulo do curso visualizado"
-          );
-          row.push(filteredLogs.length);
-        });
-        newData.push(row);
-      });
-
-      setData(newData);
-    }*/
-  }, [data, sideHeader, topHeader]);
+  }, [data, sideHeader]);
 
   return (
     <div className="dashboard-container p-3">
@@ -104,6 +73,7 @@ export default function Dashboard() {
                     maxValue={maxValue}
                     minValue={minValue}
                     compact={true}
+                    onTHeaderClick={(item) => navigate(`/individual/${item}`)}
                   />
                 </div>
               </div>
