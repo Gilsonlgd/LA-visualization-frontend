@@ -23,6 +23,12 @@
   text-orientation: upright;
   white-space: nowrap;
   user-select: none;
+  transition: all 0.3s;
+}
+
+.compact .top-header:hover {
+  background-color: rgba(215, 215, 215, 0.401);
+  cursor: pointer;
 }
 
 .standard .top-header {
@@ -32,6 +38,8 @@
   height: 50px;
   user-select: none;
 }
+
+
 
 .side-header {
   max-width: 300px;
@@ -86,4 +94,8 @@
 .table-header {
   position: sticky;
   top: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

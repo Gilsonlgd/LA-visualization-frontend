@@ -74,6 +74,7 @@ export default function Dashboard() {
                     minValue={minValue}
                     compact={true}
                     onTHeaderClick={(item) => navigate(`/individual/${item}`)}
+                    rowSumFilter={5}
                   />
                 </div>
               </div>

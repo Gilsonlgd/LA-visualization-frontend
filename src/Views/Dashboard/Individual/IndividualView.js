@@ -87,6 +87,7 @@ export default function IndividualView() {
                     maxValue={maxValue}
                     minValue={minValue}
                     compact={false}
+                    rowSumFilter={0}
                   />
                 </div>
               </div>
